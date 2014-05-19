@@ -1,8 +1,7 @@
 #import <Cocoa/Cocoa.h>
 #import <GPUImage/GPUImage.h>
 
-@interface SLSDocument : NSDocument
-{
+@interface SLSDocument : NSDocument {
   GPUImagePicture *inputPicture;
   GPUImageBilateralFilter *surfaceBlurFilter;
   GPUImageSharpenFilter *sharpenFilter;

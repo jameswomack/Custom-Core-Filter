@@ -1,6 +1,6 @@
 #import "SLSDocument.h"
 #import "CISurfaceBlurFilter.h"
-#import "NSImage+FIlter.h"
+#import "NSImage+Filter.h"
 
 @implementation SLSDocument
 {
@@ -12,38 +12,43 @@
 @synthesize texelSpacingMultiplier = _texelSpacingMultiplier;
 @synthesize sharpening = _sharpening;
 
-- (NSString *)windowNibName
-{
+
++ (void)initialize {
+  // This is to ensure registration takes place prior to
+  // use of `[CIFilter filterWithName:aName]`
+  [CISurfaceBlurFilter registerFilter];
+}
+
+
++ (BOOL)autosavesInPlace {
+  return YES;
+}
+
+
+- (NSString *)windowNibName {
     // Override returning the nib file name of the document
     // If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
     return @"SLSDocument";
 }
 
-- (void)windowControllerDidLoadNib:(NSWindowController *)aController
-{
+- (void)windowControllerDidLoadNib:(NSWindowController *)aController {
   [super windowControllerDidLoadNib:aController];
   
-  [CISurfaceBlurFilter initialize];
-
   dispatch_async(dispatch_get_main_queue(), ^{
     if(!surfaceBlur) {
-      surfaceBlur = CISurfaceBlurFilter.new;
-      [surfaceBlur setValue:[self.imageView.image CIImage] forKey:kCIInputImageKey];
+      surfaceBlur = (CISurfaceBlurFilter *)[CIFilter filterWithName:@"CISurfaceBlur"];
+      [surfaceBlur setValue:self.imageView.image.CIImage forKey:kCIInputImageKey];
+      [surfaceBlur setDefaults];
     }
     
-    [surfaceBlur setValue:@(_distanceNormalizationFactor)  forKey:kCIDistanceNormalizationFactorKey];
-    [surfaceBlur setValue:@(_texelSpacingMultiplier) forKey:kCITexelSpacingMultiplierKey];
-    [surfaceBlur setValue:@(_sharpening) forKey:kCIInputSharpnessKey];
+    self.distanceNormalizationFactor = surfaceBlur.distanceNormalizationFactor.floatValue;
+    self.texelSpacingMultiplier      = surfaceBlur.texelSpacingMultiplier.floatValue;
+    self.sharpening                  = [[surfaceBlur valueForKeyPath:kCIInputSharpnessKey] floatValue];
     
-    [surfaceBlur outputImage];
-    self.imageView.image = [surfaceBlur outputNSImage];
+    self.imageView.image = surfaceBlur.outputNSImage;
   });
 }
 
-+ (BOOL)autosavesInPlace
-{
-    return YES;
-}
 
 - (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
 {
@@ -54,10 +59,7 @@
     return nil;
 }
 
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
-{
-
-  
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError {
   return YES;
 }
 

@@ -1,14 +1,14 @@
 //
-//  NSImage+FIlter.m
+//  NSImage+Filter.m
 //  SurfaceBlurFilter
 //
 //  Created by James Womack on 5/15/14.
-//  Copyright (c) 2014 Sunset Lake Software LLC. All rights reserved.
+//  Copyright (c) 2014 Noble Gesture. All rights reserved.
 //
 
-#import "NSImage+FIlter.h"
+#import "NSImage+Filter.h"
 
-@implementation NSImage (FIlter)
+@implementation NSImage (Filter)
 - (CIImage *)CIImage; {
   return [CIImage imageWithCGImage:self.CGImage];
 }

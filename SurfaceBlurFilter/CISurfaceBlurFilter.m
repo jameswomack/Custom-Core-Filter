@@ -3,12 +3,18 @@
 //  SurfaceBlurFilter
 //
 //  Created by James Womack on 5/15/14.
-//  Copyright (c) 2014 Sunset Lake Software LLC. All rights reserved.
+//  Copyright (c) 2014 Noble Gesture. All rights reserved.
 //
 
 
 #import "CISurfaceBlurFilter.h"
-#import "NSImage+FIlter.h"
+#import "NSImage+Filter.h"
+
+
+#define FILTER_NAME @"CISurfaceBlur"
+#define DISPLAY_NAME @"Surface Blur Filter"
+#define FILTER_CATEGORIES @[kCICategoryStylize, kCICategoryBlur,kCICategoryStillImage]
+
 
 NSString* const kCIDistanceNormalizationFactorKey = @"distanceNormalizationFactor";
 NSString* const kCITexelSpacingMultiplierKey = @"texelSpacingMultiplier";
@@ -28,17 +34,46 @@ NSString* const kCISurfaceBlurFilter = @"CISurfaceBlur";
 
 + (void)initialize
 {
-  id constructor = self.new;
-  [CIFilter registerFilterName:@"CISurfaceBlur"
-                   constructor:constructor
-               classAttributes:@{kCIAttributeFilterDisplayName: @"Surface Blur Filter",
-                                 kCIAttributeFilterCategories:  @[kCICategoryStylize, kCICategoryBlur,
-                                                                  kCICategoryStillImage]}];
+  [self registerFilter];
 }
 
+
++ (void)registerFilter
+{
+  id constructor = self.new;
+  [CIFilter registerFilterName:FILTER_NAME
+                   constructor:constructor
+               classAttributes:@{kCIAttributeFilterDisplayName:DISPLAY_NAME,
+                                 kCIAttributeFilterCategories:FILTER_CATEGORIES}];
+  
+  id filterTest = [CIFilter filterWithName:FILTER_NAME];
+  NSAssert((filterTest != nil), @"%@ is nil", FILTER_NAME);
+}
+
+
+- (id)initWithCIImage:(CIImage *)CIImage; {
+  if ((self = super.init)) {
+    [self setValue:CIImage forKey:kCIInputImageKey];
+    [self setDefaults];
+  }
+  return self;
+}
+
+
+- (void)setDefaults {
+  [self setValue:@(6)  forKey:kCIDistanceNormalizationFactorKey];
+  [self setValue:@(5) forKey:kCITexelSpacingMultiplierKey];
+  [self setValue:@(.4) forKey:kCIInputSharpnessKey];
+}
+
+
 - (CIFilter *)filterWithName:(NSString *)filterName {
-  CISurfaceBlurFilter *filter = CISurfaceBlurFilter.new;
-  return filter;
+  return CISurfaceBlurFilter.new;
+}
+
+
+- (CIFilter *)filterWithName:(NSString *)filterName CIImage:(CIImage *)CIImage {
+  return [CISurfaceBlurFilter.alloc initWithCIImage:CIImage];
 }
 
 
@@ -77,6 +112,9 @@ NSString* const kCISurfaceBlurFilter = @"CISurfaceBlur";
 
 
 - (NSImage *)outputNSImage {
+  if(!filteredNSImage) {
+    [self outputImage];
+  }
   return filteredNSImage;
 }
 
