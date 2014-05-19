@@ -12,7 +12,7 @@
 		1B0CDE1B1929D8DF00251B38 /* SLSDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B0CDE0D1929D8DF00251B38 /* SLSDocument.xib */; };
 		1B0CDE1F1929D8DF00251B38 /* SLSDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CDE141929D8DF00251B38 /* SLSDocument.m */; };
 		1B0CDE311929D90B00251B38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CDE2B1929D90B00251B38 /* main.m */; };
-		1B0CDE321929D90B00251B38 /* NSImage+FIlter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CDE2D1929D90B00251B38 /* NSImage+FIlter.m */; };
+		1B0CDE321929D90B00251B38 /* NSImage+Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0CDE2D1929D90B00251B38 /* NSImage+Filter.m */; };
 		1B0CDE331929D90B00251B38 /* original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1B0CDE2E1929D90B00251B38 /* original.jpg */; };
 		1B0CDE341929D90B00251B38 /* SurfaceBlurFilter-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1B0CDE2F1929D90B00251B38 /* SurfaceBlurFilter-Info.plist */; };
 		1B0CDE3D1929D93E00251B38 /* GPUImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0CDE3C1929D93900251B38 /* GPUImage.framework */; };
@@ -50,8 +50,8 @@
 		1B0CDE131929D8DF00251B38 /* SLSDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSDocument.h; sourceTree = "<group>"; };
 		1B0CDE141929D8DF00251B38 /* SLSDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSDocument.m; sourceTree = "<group>"; };
 		1B0CDE2B1929D90B00251B38 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1B0CDE2C1929D90B00251B38 /* NSImage+FIlter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+FIlter.h"; sourceTree = "<group>"; };
-		1B0CDE2D1929D90B00251B38 /* NSImage+FIlter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+FIlter.m"; sourceTree = "<group>"; };
+		1B0CDE2C1929D90B00251B38 /* NSImage+Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Filter.h"; sourceTree = "<group>"; };
+		1B0CDE2D1929D90B00251B38 /* NSImage+Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+Filter.m"; sourceTree = "<group>"; };
 		1B0CDE2E1929D90B00251B38 /* original.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = original.jpg; sourceTree = "<group>"; };
 		1B0CDE2F1929D90B00251B38 /* SurfaceBlurFilter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SurfaceBlurFilter-Info.plist"; sourceTree = "<group>"; };
 		1B0CDE301929D90B00251B38 /* SurfaceBlurFilter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SurfaceBlurFilter-Prefix.pch"; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				1B0CDE2B1929D90B00251B38 /* main.m */,
-				1B0CDE2C1929D90B00251B38 /* NSImage+FIlter.h */,
-				1B0CDE2D1929D90B00251B38 /* NSImage+FIlter.m */,
+				1B0CDE2C1929D90B00251B38 /* NSImage+Filter.h */,
+				1B0CDE2D1929D90B00251B38 /* NSImage+Filter.m */,
 				1B0CDE2E1929D90B00251B38 /* original.jpg */,
 				1B0CDE2F1929D90B00251B38 /* SurfaceBlurFilter-Info.plist */,
 				1B0CDE301929D90B00251B38 /* SurfaceBlurFilter-Prefix.pch */,
@@ -234,7 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B0CDE321929D90B00251B38 /* NSImage+FIlter.m in Sources */,
+				1B0CDE321929D90B00251B38 /* NSImage+Filter.m in Sources */,
 				1B0CDE1F1929D8DF00251B38 /* SLSDocument.m in Sources */,
 				1B0CDE311929D90B00251B38 /* main.m in Sources */,
 				1B0CDE171929D8DF00251B38 /* CISurfaceBlurFilter.m in Sources */,
